@@ -35,6 +35,7 @@ namespace TechTalk.JiraRestClient
         Issue<TIssueFields> CreateIssue(String projectKey, String issueType, String summary);
         /// <summary>Creates an issue of the specified type for the given project</summary>
         Issue<TIssueFields> CreateIssue(String projectKey, String issueType, TIssueFields issueFields);
+        Issue<TIssueFields> CreateIssue(String projectKey, String issueType, TIssueFields issueFields, IDictionary<string, object> customFields);
         /// <summary>Updates the given issue on the remote system</summary>
         Issue<TIssueFields> UpdateIssue(Issue<TIssueFields> issue);
         /// <summary>Deletes the given issue from the remote system</summary>
