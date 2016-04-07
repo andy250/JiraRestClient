@@ -176,6 +176,11 @@ namespace TechTalk.JiraRestClient
 
         public Issue<TIssueFields> CreateIssue(String projectKey, String issueType, TIssueFields issueFields)
         {
+            return CreateIssue(projectKey, issueType, issueFields, null);
+        }
+
+        public Issue<TIssueFields> CreateIssue(String projectKey, String issueType, TIssueFields issueFields, IDictionary<string, object> customFields)
+        {
             try
             {
                 var request = CreateRequest(Method.POST, "issue");
@@ -199,6 +204,14 @@ namespace TechTalk.JiraRestClient
                 {
                     var value = property.GetValue(issueFields, null);
                     if (value != null) issueData.Add(property.Name, value);
+                }
+
+                if (customFields != null)
+                {
+                    foreach (var customField in customFields)
+                    {
+                        issueData.Add(customField.Key, customField.Value);
+                    }
                 }
 
                 request.AddBody(new { fields = issueData });
